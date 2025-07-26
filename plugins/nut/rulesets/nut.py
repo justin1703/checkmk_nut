@@ -35,19 +35,22 @@ def _migrate(value: object) -> Mapping[str, object]:
         if isinstance(v, tuple):
             if len(v) == 2 and v[0] == "fixed" and isinstance(v[1], tuple):
                 return v
-            elif len(v) == 2:
+            elif len(v) == 2 and isinstance(v[0], (int, float)) and isinstance(v[1], (int, float)):
                 return ("fixed", (int(v[0]), int(v[1])))
-            elif len(v) == 4:
+            elif len(v) == 4 and all(isinstance(x, (int, float)) for x in v):
                 return {
                     "lower": ("fixed", (int(v[0]), int(v[1]))),
                     "upper": ("fixed", (int(v[2]), int(v[3]))),
                 }
+        # Handle special values like 'no_levels'
+        if isinstance(v, str) or v is None:
+            return v
         return v
 
     if isinstance(value, dict):
         out = {}
         for k, v in value.items():
-            if k == "input_frequency" and isinstance(v, tuple) and len(v) == 4:
+            if k == "input_frequency" and isinstance(v, tuple) and len(v) == 4 and all(isinstance(x, (int, float)) for x in v):
                 out[k] = {
                     "lower": ("fixed", (int(v[0]), int(v[1]))),
                     "upper": ("fixed", (int(v[2]), int(v[3]))),
