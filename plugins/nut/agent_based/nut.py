@@ -270,9 +270,13 @@ def check_nut(item: str, params: Mapping[str, Any], section: Section) -> CheckRe
             levels_lower = metric_params.get("lower", None)
             levels_upper = metric_params.get("upper", None)
         else:
-            # If metric_params is a simple value (like a fixed threshold),
-            levels_lower = metric_params if metric_params is not None else None
-            levels_upper = None
+            # check_levels can handle tuple format directly
+            if _METRIC_SPECS[metric][4]:  # upper_levels is True
+                levels_upper = metric_params
+                levels_lower = None
+            else:  # lower_levels is True
+                levels_lower = metric_params
+                levels_upper = None
 
         yield from check_levels(
             ups_data[metric],
