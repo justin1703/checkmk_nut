@@ -32,14 +32,14 @@ This section describes how to manually install the NUT plugin on both the Checkm
 
 Install the Checkmk extension package (`mkp`) on the server:
 ```bash
-# Switch to the Checkmk user
-su cmk
+# Switch to your Checkmk site user (e.g., cmk)
+su - cmk
 
 # Download the NUT plugin package (mkp) to /tmp
-wget https://github.com/virus2500/checkmk_nut/releases/download/v3.0.4/nut-3.0.4.mkp -O /tmp/
+wget https://github.com/virus2500/checkmk_nut/releases/download/<version>/nut-<version>.mkp -O /tmp/
 
 # Add the mkp package to the Checkmk installation
-mkp add /tmp/nut-3.0.4.mkp
+mkp add /tmp/nut-<version>.mkp
 
 # Enable the NUT plugin in Checkmk
 mkp enable nut
@@ -52,7 +52,11 @@ mkp list
 
 ```bash
 # Download the plugin script to the Checkmk agent plugins directory
-wget https://raw.githubusercontent.com/virus2500/checkmk_nut/refs/heads/main/local/share/check_mk/agents/plugins/nut.sh -O /usr/lib/check_mk_agent/plugins
+# Option 1: From the internet
+wget https://raw.githubusercontent.com/virus2500/checkmk_nut/refs/heads/main/local/share/check_mk/agents/plugins/nut.sh -O /usr/lib/check_mk_agent/plugins/nut.sh
+
+# Option 2: If your agent host has no internet access, copy it from the Checkmk site
+mv ~/local/share/check_mk/agents/plugins/nut.sh /usr/lib/check_mk_agent/plugins/nut.sh
 
 # Make the script executable
 chmod +x /usr/lib/check_mk_agent/plugins/nut.sh 
