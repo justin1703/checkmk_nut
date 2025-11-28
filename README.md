@@ -56,7 +56,8 @@ mkp list
 wget https://raw.githubusercontent.com/virus2500/checkmk_nut/refs/heads/main/local/share/check_mk/agents/plugins/nut.sh -O /usr/lib/check_mk_agent/plugins/nut.sh
 
 # Option 2: If your agent host has no internet access, copy it from the Checkmk site
-cp ~/local/share/check_mk/agents/plugins/nut.sh /usr/lib/check_mk_agent/plugins/nut.sh
+scp ~/local/share/check_mk/agents/plugins/nut.sh user@target-host:/tmp/
+sudo mv /tmp/nut.sh /usr/lib/check_mk_agent/plugins/nut.sh
 
 # Make the script executable
 chmod +x /usr/lib/check_mk_agent/plugins/nut.sh 
