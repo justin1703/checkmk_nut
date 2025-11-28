@@ -26,9 +26,9 @@ Additionally, it includes an agent bakery implementation to automate the deploym
 ### Manual Installation Guide (Client & Server)
 This section describes how to manually install the NUT plugin on both the Checkmk server and the monitored client, which is running NUT-Server.  
 
-> ⚠️ **Warning:** Tested with **Checkmk Raw Edition 2.4.0p14** and a local **NUT server** (`upsd`) running on the monitored host.
+> ⚠️ **Important:** Tested with **Checkmk Raw Edition 2.4.0p14** and a local **NUT server** (`upsd`) running on the monitored host.
 
-Server Installation 
+**Server Installation**
 
 Install the Checkmk extension package (`mkp`) on the server:
 ```bash
@@ -36,10 +36,10 @@ Install the Checkmk extension package (`mkp`) on the server:
 su cmk
 
 # Download the NUT plugin package (mkp) to /tmp
-wget https://github.com/virus2500/checkmk_nut/releases/download/vX.Y.Z/nut-X.Y.Z.mkp -O /tmp/
+wget https://github.com/virus2500/checkmk_nut/releases/download/v3.0.4/nut-3.0.4.mkp -O /tmp/
 
 # Add the mkp package to the Checkmk installation
-mkp add /tmp/nut-X.Y.Z.mkp
+mkp add /tmp/nut-3.0.4.mkp
 
 # Enable the NUT plugin in Checkmk
 mkp enable nut
@@ -48,7 +48,7 @@ mkp enable nut
 mkp list 
 ```
 
-Client Installation
+**Client Installation**
 
 ```bash
 # Download the plugin script to the Checkmk agent plugins directory
